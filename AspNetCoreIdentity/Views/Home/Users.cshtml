@@ -1,0 +1,23 @@
+﻿@model List<IdentityUser>
+@inject UserManager<IdentityUser> userManager
+@{
+    Layout = null;
+}
+
+<h1 class="h1 font-weight-bolder text-center">Kullanıcı ve Rolleri</h1>
+
+<ul>
+    @foreach (IdentityUser user in Model)
+    {
+        <li>
+            @user.UserName
+
+            <ul>
+                @foreach (var role in await userManager.GetRolesAsync(user))
+                {
+                    <li>@role</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
